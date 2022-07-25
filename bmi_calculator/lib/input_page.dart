@@ -14,15 +14,57 @@ class _bmiState extends State<bmi> {
           title: Text('bmi calci'),
           centerTitle: true,
         ),
-        body: Center(
-          child: Container(
-            child: Text("body"),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){},
-          child: Icon(Icons.add),
+        body: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: reusableCard(),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: reusableCard(),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: reusableCard(),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: reusableCard(),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child:reusableCard(),
+                  ),
+                ],
+              ),
+            ),
+          ],
         )
+    );
+  }
+}
+
+class reusableCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Color(0xff4f486b),
+        borderRadius: BorderRadius.circular(10),
+      ),
     );
   }
 }
