@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 class ColumnCard extends StatelessWidget {
   ColumnCard({@required this.iconn,this.txt});
   final iconn;
@@ -14,10 +15,7 @@ class ColumnCard extends StatelessWidget {
         ),
         Text(
           txt,
-          style: TextStyle(
-            fontSize: 18,
-            color: Color(0xff8d8e98),
-          ),
+          style: kTextStyle,
         ),
       ],
     );
