@@ -17,12 +17,14 @@ class _bmiState extends State<bmi> {
   Color maleCardColor = kInactiveCardColor;
   Color femaleCardColor = kInactiveCardColor;
   var selectedGen;
+  int age = 20;
   int num = 180;
+  int weight = 60;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('bmi calci'),
+          title: Text('BMI CALCULATOR'),
           centerTitle: true,
         ),
         body: Column(
@@ -54,7 +56,7 @@ class _bmiState extends State<bmi> {
                     child: ReusableCard(
                       onPress: () {
                         setState(() {
-                          selectedGen = Gender.male;
+                          selectedGen = Gender.female;
                         });
                       },
                       colour: selectedGen == Gender.female
@@ -89,17 +91,31 @@ class _bmiState extends State<bmi> {
                           num.toString(),
                           style: kSliderCardStyle,
                         ),
-                        Text("cm",),
+                        Text(
+                          "cm",
+                        ),
                       ],
                     ),
-                    Slider(value: num.toDouble(),min: 120.0,max: 220.0,
-                        activeColor:Color(0xffeb1555) ,
-                        inactiveColor: Color(0xff1d1e33),
-                        onChanged: (double newVal){
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.white,
+                          overlayColor: Color(0x1feb1555),
+                          thumbColor: Color(0xffeb1555),
+                          trackHeight: 1,
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 30)),
+                      child: Slider(
+                          value: num.toDouble(),
+                          min: 120.0,
+                          max: 220.0,
+                          onChanged: (double newVal) {
                             setState(() {
-                              num=newVal.round();
+                              num = newVal.round();
                             });
-                    }),
+                          }),
+                    ),
                   ],
                 ),
               ),
@@ -111,25 +127,120 @@ class _bmiState extends State<bmi> {
                   Expanded(
                     flex: 1,
                     child: ReusableCard(
-                      colour: kActiveCardColor,
-                    ),
+                        colour: kActiveCardColor,
+                        cardChild: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'WEIGHT',
+                              style: kTextStyle,
+                            ),
+                            Text(
+                              weight.toString(),
+                              style: kSliderCardStyle,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RoundIconButton(
+                                    icons: FontAwesomeIcons.minus,
+                                    OnPress: () {
+                                      setState(() {
+                                        weight--;
+                                      });
+                                    }),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                RoundIconButton(
+                                    icons: FontAwesomeIcons.plus,
+                                    OnPress: () {
+                                      setState(() {
+                                        weight++;
+                                      });
+                                    }),
+                              ],
+                            )
+                          ],
+                        )),
                   ),
                   Expanded(
                     flex: 1,
                     child: ReusableCard(
-                      colour: kActiveCardColor,
-                    ),
+                        colour: kActiveCardColor,
+                        cardChild: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'AGE',
+                              style: kTextStyle,
+                            ),
+                            Text(
+                              age.toString(),
+                              style: kSliderCardStyle,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RoundIconButton(
+                                    icons: FontAwesomeIcons.minus,
+                                    OnPress: () {
+                                      setState(() {
+                                        age--;
+                                      });
+                                    }),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                RoundIconButton(
+                                    icons: FontAwesomeIcons.plus,
+                                    OnPress: () {
+                                      setState(() {
+                                        age++;
+                                      });
+                                    }),
+                              ],
+                            )
+                          ],
+                        )),
                   ),
                 ],
               ),
             ),
-            Container(
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10),
-              width: double.infinity,
-              height: kBottomHeight,
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, 'results');
+              },
+              child: Container(
+                child: Center(
+                  child: Text(
+                    "CALCULATE",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                color: kBottomContainerColor,
+                margin: EdgeInsets.only(top: 10),
+                width: double.infinity,
+                height: kBottomHeight,
+              ),
             ),
           ],
         ));
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton({@required this.icons, this.OnPress});
+  final icons;
+  final OnPress;
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: OnPress,
+      fillColor: Color(0xff8d8e98),
+      shape: CircleBorder(),
+      constraints: BoxConstraints.tightFor(width: 45, height: 45),
+      child: Icon(icons),
+    );
   }
 }

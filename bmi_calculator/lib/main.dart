@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'input_page.dart';
-
+import 'results_page.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -9,6 +9,8 @@ void main() {
       scaffoldBackgroundColor: Color(0xff2D2E40),
       colorScheme: ColorScheme.dark(primary: Color(0xff2D2E40)).copyWith(secondary: Colors.pink,onSecondary: Colors.white),
     ),
-    home: bmi(),
+    initialRoute: 'input',
+    routes:{'results':(context)=>result(),
+    'input':(context)=>bmi()}
   ));
 }
