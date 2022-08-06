@@ -1,11 +1,13 @@
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'reusable_card.dart';
-import 'icon_content.dart';
-import 'constants.dart';
-
+import '../calculator.dart';
+import '../components/reusable_card.dart';
+import '../components/icon_content.dart';
+import '../components/constants.dart';
+import '../components/largeButton.dart';
+import '../components/roundIconButton.dart';
 enum Gender { female, male }
-
 class bmi extends StatefulWidget {
   const bmi({Key? key}) : super(key: key);
 
@@ -207,40 +209,15 @@ class _bmiState extends State<bmi> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, 'results');
-              },
-              child: Container(
-                child: Center(
-                  child: Text(
-                    "CALCULATE",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                color: kBottomContainerColor,
-                margin: EdgeInsets.only(top: 10),
-                width: double.infinity,
-                height: kBottomHeight,
-              ),
-            ),
+            LargeButton(dataField:"CALCULATE",onTap: () {
+
+              Calculator cal= Calculator(height:num,weight: weight);
+              Navigator.push(context,MaterialPageRoute(
+                builder: (context)=> result(bmi: cal.BMI(), BMIresult: cal.getResult(), Feedback: cal.getFeedback())
+              ),);
+            },),
           ],
         ));
   }
 }
 
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({@required this.icons, this.OnPress});
-  final icons;
-  final OnPress;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: OnPress,
-      fillColor: Color(0xff8d8e98),
-      shape: CircleBorder(),
-      constraints: BoxConstraints.tightFor(width: 45, height: 45),
-      child: Icon(icons),
-    );
-  }
-}
