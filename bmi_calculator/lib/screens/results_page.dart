@@ -1,9 +1,7 @@
 import 'package:bmi_calculator/components/constants.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
-import 'package:bmi_calculator/screens/input_page.dart';
 import 'package:flutter/material.dart';
 import '../components/largeButton.dart';
-import 'package:bmi_calculator/calculator.dart';
 
 class result extends StatelessWidget {
   result({required this.bmi,required this.BMIresult,required this.Feedback});
@@ -40,19 +38,19 @@ class result extends StatelessWidget {
                 cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: const [
+                  children:  [
                     Text(
-                    "",
+                    bmi,
                       style: kResultTextStyle,
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      "",
+                      BMIresult,
                       style: kBMIStyle,
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      "",
+                      Feedback,
                       style: kBodyText,
                       textAlign: TextAlign.center,
                     ),

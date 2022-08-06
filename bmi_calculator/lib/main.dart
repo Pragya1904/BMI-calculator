@@ -10,7 +10,6 @@ void main() {
       colorScheme: ColorScheme.dark(primary: Color(0xff2D2E40)).copyWith(secondary: Colors.pink,onSecondary: Colors.white),
     ),
     initialRoute: 'input',
-    routes:{'results':(context)=>result(),
-    'input':(context)=>bmi()}
+    routes:{'input':(context)=>bmi()}
   ));
 }
